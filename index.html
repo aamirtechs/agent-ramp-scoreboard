@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Ramp Scoreboard: New Hire Ramp Analytics by Cohort Only</title>
+<meta name="description" content="New hire ramp analytics by cohort only: QA, conversion, handle time and compliance QA against target bands, with coaching flags and no individual ranking.">
+<meta name="keywords" content="new hire ramp analytics, cohort QA scoreboard, agent ramp curve, remote sales floor coaching, compliance QA early warning">
+<meta name="author" content="Amir Hussain">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aamirtechs.github.io/agent-ramp-scoreboard/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#0b1f3a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agent Ramp Scoreboard: New Hire Ramp Analytics by Cohort Only">
+<meta property="og:description" content="New hire ramp analytics by cohort only: QA, conversion, handle time and compliance QA against target bands, with coaching flags and no individual ranking.">
+<meta property="og:url" content="https://aamirtechs.github.io/agent-ramp-scoreboard/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Agent Ramp Scoreboard">
+<meta name="twitter:description" content="New hire ramp analytics by cohort only: QA, conversion, handle time and compliance QA against target bands, with coaching flags and no individual ranking.">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Agent Ramp Scoreboard", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "Amir Hussain", "url": "https://aamirtechs.com"}, "url": "https://aamirtechs.github.io/agent-ramp-scoreboard/"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>:root{--navy:#0b1f3a;--navy2:#122c50;--gold:#d4a72c;--ink:#16233a;--muted:#5a6a84;--line:#e3e9f2;--bg:#f6f8fb;--card:#ffffff}*{box-sizing:border-box}body{margin:0;font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--ink)}header{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;padding:44px 20px 34px;text-align:center}header h1{font-family:Sora,sans-serif;font-size:2.2rem;margin:0 0 10px}header h1 span{color:var(--gold)}header p{max-width:720px;margin:0 auto 16px;opacity:.92}.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.stats span{border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:5px 14px;font-size:.85rem}main{max-width:1020px;margin:0 auto;padding:24px 16px 40px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 6px 24px rgba(11,31,58,.06)}label{font-weight:700;display:block;margin:14px 0 6px}input[type=text],input[type=date],input[type=number],input[type=file],select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;font:inherit}.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.btn-run{background:var(--gold);color:var(--navy);border:0;border-radius:10px;padding:12px 22px;cursor:pointer;font:inherit;font-weight:800;margin-top:16px}.btn-sec{background:var(--navy);color:#fff;border:0;border-radius:10px;padding:10px 18px;cursor:pointer;font:inherit;margin:8px 6px 0 0}.privacy{color:var(--muted);font-size:.9rem;margin-top:10px}table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}td,th{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}section.features{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px 24px;margin-top:20px}footer{background:var(--navy);color:#dbe4f0;text-align:center;padding:26px 16px;font-size:.92rem}footer a{color:var(--gold)}.msg{margin-top:12px;white-space:pre-wrap;font-weight:700}pre.out{white-space:pre-wrap;word-break:break-word;background:#f2f5fa;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:.88rem}.pass{color:#137333;font-weight:700}.warn{color:#9a6b00;font-weight:700}.fail{color:#b3261e;font-weight:700}.add{background:#dff5e3}.del{background:#fde2e2;text-decoration:line-through}</style>
+</head>
+<body>
+
+<header>
+<h1>Agent Ramp <span>Scoreboard</span></h1>
+<p>New hire ramp analytics by cohort only, so managers can coach a ramp problem in week 2 instead of discovering it in month 2.</p>
+<div class="stats"><span>Free</span><span>100% in your browser</span><span>No sign-up</span></div>
+</header>
+<main>
+<div class="card">
+<label for="file">Ramp CSV file (agent_ref, cohort, week_on_floor, qa_score, conversion_rate, aht_min, compliance_qa)</label>
+<input type="file" id="file" accept=".csv,text/csv">
+<label for="paste">Or paste CSV rows</label>
+<textarea id="paste" rows="8" placeholder="Paste CSV here"></textarea>
+<button class="btn-sec" id="sample">Load sample data</button>
+<div class="cols">
+<div><label for="minSize">Minimum cohort size</label><input type="number" id="minSize" value="5" min="1"></div>
+<div><label for="qaLow">QA band low</label><input type="number" id="qaLow" value="80"></div>
+<div><label for="qaHigh">QA band high</label><input type="number" id="qaHigh" value="100"></div>
+<div><label for="compLow">Compliance QA band low</label><input type="number" id="compLow" value="90"></div>
+<div><label for="compHigh">Compliance QA band high</label><input type="number" id="compHigh" value="100"></div>
+<div><label for="convLow">Conversion band low</label><input type="number" id="convLow" value="15"></div>
+<div><label for="convHigh">Conversion band high</label><input type="number" id="convHigh" value="40"></div>
+<div><label for="ahtLow">AHT band low (min)</label><input type="number" id="ahtLow" value="0"></div>
+<div><label for="ahtHigh">AHT band high (min)</label><input type="number" id="ahtHigh" value="12"></div>
+</div>
+<p class="privacy">Runs 100% in your browser. Your files never leave this device.</p>
+<p>Reporting is aggregated by cohort only. There is no individual ranking in this tool, on screen or in the download.</p>
+<button class="btn-run" id="run">Build scoreboard</button>
+<button class="btn-sec" id="dl" disabled>Download cohort summary CSV</button>
+<div class="msg" id="msg" role="status"></div>
+<div id="results"></div>
+</div>
+<section class="features">
+<h2>How it works</h2>
+<ul>
+<li>Group input by cohort and week on floor before anything is displayed, so per-agent rows are never rendered.</li>
+<li>Cohorts below the minimum size are suppressed with an explicit note, not quietly merged.</li>
+<li>A cohort below band on compliance QA creates a coaching task. The framing is coaching, never discipline.</li>
+<li>Sample rows use synthetic agents only, named Agent 001, Agent 002 and so on.</li>
+</ul>
+</section>
+</main>
+<footer>
+<p>Built by Amir Hussain, operations manager and founder of <a href="https://aamirtechs.com" target="_blank" rel="noopener">AamirTechs: operations, customer support and e-commerce services</a>.</p>
+<p><a href="https://github.com/aamirtechs" target="_blank" rel="noopener">More open source tools on GitHub</a></p>
+</footer>
+
+<script src="src/logic.js"></script>
+<script>
+const $=(id)=>document.getElementById(id);let last=null;
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;");}
+$("file").addEventListener("change",async(e)=>{if(e.target.files[0])$("paste").value=await e.target.files[0].text();});
+$("sample").addEventListener("click",()=>{
+ const lines=["agent_ref,cohort,week_on_floor,qa_score,conversion_rate,aht_min,compliance_qa"];
+ for(let w=1;w<=3;w++)for(let i=1;i<=6;i++)lines.push("Agent "+String(i).padStart(3,"0")+",2026-W27,"+w+","+(72+w*5)+","+(12+w*3)+","+(13-w)+","+(w===1?78:96));
+ for(let i=1;i<=3;i++)lines.push("Agent "+String(20+i).padStart(3,"0")+",2026-W28,1,90,20,8,98");
+ $("paste").value=lines.join("\n");
+});
+$("run").addEventListener("click",()=>{
+ const rows=AgentRampScoreboard.parseRows($("paste").value);
+ if(!rows.length){$("msg").textContent="Paste CSV rows or load the sample first.";return;}
+ const bands={qa_score:{low:+$("qaLow").value,high:+$("qaHigh").value},conversion_rate:{low:+$("convLow").value,high:+$("convHigh").value},aht_min:{low:+$("ahtLow").value,high:+$("ahtHigh").value},compliance_qa:{low:+$("compLow").value,high:+$("compHigh").value}};
+ last=AgentRampScoreboard.aggregate(rows,{minCohortSize:+$("minSize").value||5,bands});
+ let h="<h3>Ramp table (cohort aggregates only)</h3><table><tr><th>Cohort</th><th>Week</th><th>Agents</th><th>Mean QA</th><th>QA flag</th><th>Conversion</th><th>AHT</th><th>Compliance QA</th><th>Compliance flag</th></tr>"+last.summary.map(s=>"<tr><td>"+esc(s.cohort)+"</td><td>"+s.week_on_floor+"</td><td>"+s.agents+"</td><td>"+s.meanQa+"</td><td>"+esc(s.flags.qa_score)+"</td><td>"+s.meanConversion+"</td><td>"+s.meanAht+"</td><td>"+s.meanCompliance+"</td><td>"+esc(s.flags.compliance_qa)+"</td></tr>").join("")+"</table>";
+ if(last.suppressed.length)h+="<h3>Suppressed cohorts</h3>"+last.suppressed.map(s=>"<p>"+esc(s.cohort)+": "+esc(s.note)+" (size "+s.size+")</p>").join("");
+ const tasks=AgentRampScoreboard.coachingTasks(last.summary);
+ if(tasks.length)h+="<h3>Coaching tasks</h3>"+tasks.map(t=>"<p>"+esc(t)+"</p>").join("");
+ $("results").innerHTML=h;$("dl").disabled=false;$("msg").textContent="Built scoreboard for "+last.summary.length+" cohort weeks.";
+});
+function dl(name,text){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type:"text/csv"}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),4000);}
+$("dl").addEventListener("click",()=>dl("cohort-summary.csv",AgentRampScoreboard.summaryToCSV(last)));
+</script>
+</body></html>
